@@ -1,0 +1,45 @@
+{
+  "session_id": "35d35e17-758f-4fd7-8826-fcaf373e30d7",
+  "name": "What cloud certifications does Meshari",
+  "created_at": "2026-05-29T22:00:45.354628",
+  "files": [
+    {
+      "file_id": "a544e8f9-ec5d-405b-8e96-9b0172090f55",
+      "filename": "MshariBinNassarCV.pdf",
+      "path": "uploads\\a544e8f9-ec5d-405b-8e96-9b0172090f55_MshariBinNassarCV.pdf",
+      "chunks_count": 7,
+      "status": "indexed"
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "What cloud certifications does Meshari have?",
+      "created_at": "2026-05-29T22:00:59.808591",
+      "sources": []
+    },
+    {
+      "role": "assistant",
+      "content": "Meshari has certifications in Oracle Cloud Infrastructure and Microsoft Azure.",
+      "created_at": "2026-05-29T22:01:09.435780",
+      "sources": [
+        {
+          "filename": "MshariBinNassarCV.pdf",
+          "chunk_index": 0,
+          "preview": "Meshari Naif Bin Nassar \nRiyadh, Saudi Arabia | +966553305757| MshariBinNassar@gmail.com | LinkedIn Profile \nSummary \n  AI Engineer with a strong foundation in cloud computing and AI systems, certified in Oracle Cloud Infrastructure \nand Microsoft Azure. Experienced in building scalable full-stack applications using Next.js, Docker, and PostgreSQL, \nwith exposure to AWS AI/ML services through professional training. Passionate about designing and deploying AI-\ndriven cloud solutions. \n \nProfessio"
+        },
+        {
+          "filename": "MshariBinNassarCV.pdf",
+          "chunk_index": 1,
+          "preview": "essional training. Passionate about designing and deploying AI-\ndriven cloud solutions. \n \nProfessional Experiences  \n\u25aa Company: Solutions by STC | Riyadh, Saudi Arabia                 Sep 2025 \u2013 Present \nSector: Digital Transformation & AI Solutions \n\u2022 Contributing to cloud-native and AI system design within enterprise environments \n\u2022 Utilizing containerization technologies including Docker and exploring Kubernetes-based deployments \n\u2022 Participating in the development of AI-driven solutions inc"
+        },
+        {
+          "filename": "MshariBinNassarCV.pdf",
+          "chunk_index": 2,
+          "preview": "xploring Kubernetes-based deployments \n\u2022 Participating in the development of AI-driven solutions including: \no AI Avatar platform (Text-to-Speech & Speech-to-Text integration) \no Digital Twin platform concepts \no AI-powered RFP analysis platform (Hawkeye) \n\u2022 Supporting infrastructure setup including jump host environments and secure system access. \nProjects \n\u2022 Project Name: SkillUp \u2013 Full-Stack Learning Platform                                                     Jan 2026 \u2013 May 2026 \n \nDescripti"
+        }
+      ]
+    }
+  ],
+  "updated_at": "2026-05-29T22:01:09.435780"
+}

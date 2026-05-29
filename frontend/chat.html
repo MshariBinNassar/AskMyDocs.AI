@@ -156,22 +156,20 @@
                 <h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider px-2 mb-2">
                     Navigation</h3>
                 <!-- Recent Sessions (Active) -->
-                <a class="flex items-center gap-3 px-4 py-2 border-l-4 border-primary text-primary bg-secondary-container/30 transition-opacity hover:bg-surface-variant/50"
-                    href="#">
-                    <span class="material-symbols-outlined" data-icon="history">history</span>
-                    <span class="font-label-md text-label-md">Recent Sessions</span>
-                </a>
+                <button id="recent-sessions-toggle"
+                    class="w-full flex items-center justify-between px-4 py-2 text-on-surface-variant hover:bg-surface-variant/50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined" data-icon="history">history</span>
+                        <span class="font-label-md text-label-md">Recent Sessions</span>
+                    </div>
+
+                    <span id="recent-sessions-arrow" class="material-symbols-outlined text-[18px] transition-transform">
+                        expand_more
+                    </span>
+                </button>
+                <div id="sessions-list" class="ml-10 mt-1 mb-2 space-y-1"></div>
                 <!-- Active Sub-Item for "Product Specs & Research" -->
-                <div class="ml-10 mt-1 mb-2 space-y-1">
-                    <a class="block px-2 py-1.5 text-primary font-medium text-label-md border-l border-primary/20 bg-primary/5 rounded-r"
-                        href="#">
-                        Product Specs &amp; Research
-                    </a>
-                    <a class="block px-2 py-1.5 text-secondary hover:text-on-surface transition-colors text-label-md"
-                        href="#">
-                        Q4 Strategy Deck
-                    </a>
-                </div>
+                <div id="sessions-list" class="ml-10 mt-1 mb-2 space-y-1"></div>
                 <a class="flex items-center gap-3 px-4 py-2 text-secondary hover:bg-surface-variant/50 transition-colors"
                     href="#">
                     <span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
@@ -205,12 +203,15 @@
         </div>
     </aside>
     <!-- Main Content Area -->
-    <main class="ml-[260px] flex flex-col min-h-screen bg-white">
+    <main class="ml-[260px] h-screen flex flex-col bg-white">
         <!-- TopNavBar Component -->
         <header
             class="sticky top-0 z-10 bg-white/80 backdrop-blur-md flex justify-between items-center h-16 px-container-padding border-b border-outline-variant">
             <div class="flex items-center gap-4">
-                <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Product Specs &amp; Research
+                <h2 id="session-title"
+                    class="font-headline-sm text-headline-sm text-on-surface font-bold cursor-pointer"
+                    title="Double click to rename session">
+                    Product Specs &amp; Research
                 </h2>
                 <div class="flex items-center gap-1.5 px-2.5 py-1 bg-surface-container rounded-full text-secondary">
                     <span class="material-symbols-outlined text-[16px]" data-icon="description">description</span>
@@ -237,91 +238,34 @@
             </div>
         </header>
         <!-- Chat Workspace -->
-        <section class="flex-1 overflow-y-auto px-container-padding py-10">
+        <section class="flex-1 overflow-y-auto px-container-padding py-10 pb-40">
             <div class="max-w-[800px] mx-auto space-y-12">
-                <!-- Initial Helper State (Optional, but adds depth) -->
-                <div class="text-center space-y-4 mb-16 opacity-50">
-                    <div class="w-12 h-12 bg-surface-container rounded-xl mx-auto flex items-center justify-center">
-                        <span class="material-symbols-outlined text-on-surface-variant"
-                            data-icon="auto_awesome">auto_awesome</span>
-                    </div>
-                    <p class="font-label-md text-label-md max-w-sm mx-auto">This session includes PRD.pdf,
-                        Technical_Spec.md, and Research_Notes.docx. Ask anything about their contents.</p>
-                </div>
-                <!-- User Message -->
-                <div class="flex flex-col items-end gap-2 group">
+                <!-- Initial Helper State -->
+                <div id="welcome-message" class="text-center py-16">
                     <div
-                        class="max-w-[85%] bg-surface-container-low px-5 py-4 rounded-xl text-on-surface border border-outline-variant/30">
-                        <p class="font-body-lg text-body-lg">What are the main constraints for the local storage
-                            implementation?</p>
+                        class="w-16 h-16 bg-surface-container rounded-xl mx-auto flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-primary text-3xl">
+                            auto_awesome
+                        </span>
                     </div>
-                    <span class="text-label-sm text-on-surface-variant/60 font-label-sm pr-2">Sent 10:24 AM</span>
-                </div>
-                <!-- AI Response Message -->
-                <div class="flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                    <div class="flex items-start gap-4">
-                        <div
-                            class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1 border border-primary/20">
-                            <span class="material-symbols-outlined text-primary text-[20px]"
-                                data-icon="smart_toy">smart_toy</span>
-                        </div>
-                        <div class="flex-1 space-y-4">
-                            <div class="prose prose-sm max-w-none text-on-surface">
-                                <p class="font-body-lg text-body-lg leading-relaxed">Based on the provided
-                                    documentation, the local storage implementation is subject to several key technical
-                                    and security constraints:</p>
-                                <ul class="list-disc pl-5 space-y-2 mt-3 font-body-md text-body-md">
-                                    <li><strong>Capacity Limit:</strong> The browser-side persistence is capped at 50MB
-                                        per origin to ensure compatibility across older mobile Safari versions.</li>
-                                    <li><strong>Encryption:</strong> All locally stored snippets must be encrypted using
-                                        AES-256-GCM before writing to IndexedDB.</li>
-                                    <li><strong>Latency:</strong> Read operations must complete within &lt;100ms to
-                                        avoid UI jank during document indexing.</li>
-                                    <li><strong>Persistence:</strong> Sensitive user metadata cannot be cached
-                                        permanently and must expire after the session token invalidates.</li>
-                                </ul>
-                            </div>
-                            <!-- Sources Section -->
-                            <div class="pt-4 border-t border-outline-variant/40">
-                                <p
-                                    class="font-label-sm text-label-sm text-on-surface-variant mb-3 flex items-center gap-1.5">
-                                    <span class="material-symbols-outlined text-[14px]"
-                                        data-icon="library_books">library_books</span>
-                                    SOURCES
-                                </p>
-                                <div class="flex flex-wrap gap-2">
-                                    <button
-                                        class="group flex items-center gap-2 px-3 py-1.5 bg-surface-container-high/50 hover:bg-primary/5 border border-outline-variant/30 rounded-lg transition-all">
-                                        <span
-                                            class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-primary"
-                                            data-icon="picture_as_pdf">picture_as_pdf</span>
-                                        <span class="font-label-md text-label-md text-on-surface">PRD.pdf (Page
-                                            4)</span>
-                                    </button>
-                                    <button
-                                        class="group flex items-center gap-2 px-3 py-1.5 bg-surface-container-high/50 hover:bg-primary/5 border border-outline-variant/30 rounded-lg transition-all">
-                                        <span
-                                            class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-primary"
-                                            data-icon="description">description</span>
-                                        <span
-                                            class="font-label-md text-label-md text-on-surface">Technical_Spec.md</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+                    <h2 class="text-2xl font-semibold text-on-surface">
+                        AskMyDocs.AI
+                    </h2>
+
+                    <p class="mt-4 text-on-surface-variant max-w-md mx-auto">
+                        Upload documents and start asking questions about them.
+                    </p>
                 </div>
             </div>
         </section>
         <!-- Input Area Component -->
-        <footer class="p-container-padding pb-8">
+        <footer class="mt-auto bg-white p-container-padding pb-8 border-t border-outline-variant">
             <div class="max-w-[800px] mx-auto relative group">
                 <!-- Floating Indicator for Context -->
-                <div
-                    class="absolute -top-8 left-4 flex items-center gap-2 opacity-0 group-focus-within:opacity-100 transition-opacity">
+                <div class="mb-1 ml-1 flex items-center gap-2 text-[11px] text-on-surface-variant/70">
                     <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-                    <span class="text-label-sm font-label-sm text-on-surface-variant">AI is ready to analyze 3
-                        documents</span>
+                    <span class="text-label-sm font-label-sm text-on-surface-variant">Local RAG ready</span>
                 </div>
                 <div
                     class="bg-white border border-outline-variant rounded-xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08)] focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all overflow-hidden">
@@ -343,7 +287,7 @@
                             <span
                                 class="flex items-center gap-1 text-label-sm font-label-sm text-on-surface-variant/70">
                                 <span class="material-symbols-outlined text-[14px]" data-icon="bolt">bolt</span>
-                                Claude 3.5 Sonnet
+                                Qwen2.5
                             </span>
                         </div>
                         <span class="text-label-sm font-label-sm text-on-surface-variant/40">Use ⌘ + Enter to
@@ -353,6 +297,21 @@
             </div>
         </footer>
     </main>
+    <div id="source-modal" class="hidden fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+        <div class="bg-white w-[800px] max-w-[90vw] max-h-[80vh] rounded-xl shadow-xl flex flex-col">
+            <div class="flex items-center justify-between px-6 py-4 border-b">
+                <h3 class="font-bold text-lg">Source Preview</h3>
+
+                <button id="close-source-modal" type="button" class="text-gray-500 hover:text-black text-xl">
+                    ×
+                </button>
+            </div>
+
+            <pre id="source-modal-content"
+                class="p-6 overflow-y-auto whitespace-pre-wrap text-sm leading-relaxed"></pre>
+        </div>
+    </div>
+
     <script>
         const API_BASE_URL = "http://127.0.0.1:8000";
 
@@ -396,12 +355,20 @@
 
         function addAiMessage(answer, sources = []) {
             const sourceItems = sources.map((source, index) => {
+                const encodedPreview = encodeURIComponent(source.preview || "");
+
                 return `
-            <button class="group flex items-center gap-2 px-3 py-1.5 bg-surface-container-high/50 hover:bg-primary/5 border border-outline-variant/30 rounded-lg transition-all">
-                <span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-primary">description</span>
+            <button
+                data-preview="${encodedPreview}"
+                class="source-preview-btn group flex items-center gap-2 px-3 py-1.5 bg-surface-container-high/50 hover:bg-primary/5 border border-outline-variant/30 rounded-lg transition-all"
+            >
+                <span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-primary">
+                    description
+                </span>
+
                 <span class="font-label-md text-label-md text-on-surface">
-    ${source.filename || "Unknown file"} - Chunk ${source.chunk_index ?? index}
-</span>
+                    ${source.filename || "Unknown file"} - Chunk ${source.chunk_index ?? index}
+                </span>
             </button>
         `;
             }).join("");
@@ -434,12 +401,69 @@
     `;
 
             chatContainer.insertAdjacentHTML("beforeend", html);
+
+            document.querySelectorAll(".source-preview-btn").forEach((button) => {
+                button.addEventListener("click", () => {
+                    const preview = decodeURIComponent(button.dataset.preview || "");
+                    showSourceModal(preview || "No preview available");
+                });
+            });
+        }
+
+        async function loadCurrentSession() {
+            const response = await fetch(`${API_BASE_URL}/sessions/${SESSION_ID}`);
+            const session = await response.json();
+
+            const title = document.querySelector("header h2");
+
+            if (title) {
+                title.textContent = session.name || "New Session";
+            }
+
+            const filesBadge = document.querySelector("header .rounded-full span:last-child");
+
+            if (filesBadge) {
+                filesBadge.textContent = `${session.files.length} Files`;
+            }
+
+            const welcomeMessage = document.getElementById("welcome-message");
+
+            if (welcomeMessage && session.files.length > 0) {
+                const fileNames = session.files
+                    .map(file => file.filename)
+                    .join(", ");
+
+                welcomeMessage.querySelector("p").textContent =
+                    `This session includes: ${fileNames}. Ask anything about these documents.`;
+            }
+
+            if (session.messages && session.messages.length > 0) {
+                if (welcomeMessage) {
+                    welcomeMessage.remove();
+                }
+
+                session.messages.forEach((message) => {
+                    if (message.role === "user") {
+                        addUserMessage(message.content);
+                    }
+
+                    if (message.role === "assistant") {
+                        addAiMessage(message.content, message.sources);
+                    }
+                });
+            }
         }
 
         async function sendMessage() {
             const question = textarea.value.trim();
 
             if (!question) return;
+
+            const welcomeMessage = document.getElementById("welcome-message");
+
+            if (welcomeMessage) {
+                welcomeMessage.remove();
+            }
 
             addUserMessage(question);
 
@@ -453,9 +477,7 @@
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({
-                        question
-                    })
+                    body: JSON.stringify({ question })
                 }
             );
 
@@ -472,7 +494,165 @@
                 sendMessage();
             }
         });
+
+       async function loadSessions() {
+    const response = await fetch(`${API_BASE_URL}/sessions/`);
+    const sessions = await response.json();
+
+    const sessionsList = document.getElementById("sessions-list");
+
+    if (!sessionsList) return;
+
+    sessionsList.className = "mt-1 mb-2 space-y-1";
+    sessionsList.innerHTML = "";
+
+    sessions.forEach((session) => {
+        const wrapper = document.createElement("div");
+
+        wrapper.className =
+            "flex items-center justify-between w-full px-4 group";
+
+        if (session.session_id === SESSION_ID) {
+            wrapper.className =
+                "flex items-center justify-between w-full px-4 group bg-primary/10 border-l-2 border-primary";
+        }
+
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className =
+            "flex-1 min-w-0 text-left py-2 text-label-md text-on-surface-variant hover:text-primary truncate";
+
+        if (session.session_id === SESSION_ID) {
+            button.className =
+                "flex-1 min-w-0 text-left py-2 text-label-md text-primary font-semibold truncate";
+        }
+
+        button.textContent = session.name || "Untitled Session";
+
+        button.addEventListener("click", () => {
+            localStorage.setItem("active_session_id", session.session_id);
+            localStorage.setItem(
+                "active_session_name",
+                session.name || "Untitled Session"
+            );
+
+            window.location.href = `chat.html?session_id=${session.session_id}`;
+        });
+
+        const deleteBtn = document.createElement("button");
+
+        deleteBtn.type = "button";
+        deleteBtn.innerHTML = `
+            <span class="material-symbols-outlined text-[18px]">
+                delete
+            </span>
+        `;
+
+        deleteBtn.className =
+            "shrink-0 opacity-0 group-hover:opacity-100 p-1 text-red-500 hover:text-red-700 transition";
+
+        deleteBtn.addEventListener("click", async (event) => {
+            event.stopPropagation();
+
+            const confirmed = confirm(
+                `Delete "${session.name || "Untitled Session"}"?`
+            );
+
+            if (!confirmed) return;
+
+            await fetch(
+                `${API_BASE_URL}/sessions/${session.session_id}`,
+                {
+                    method: "DELETE"
+                }
+            );
+
+            if (session.session_id === SESSION_ID) {
+                window.location.href = "index.html";
+                return;
+            }
+
+            loadSessions();
+        });
+
+        wrapper.appendChild(button);
+        wrapper.appendChild(deleteBtn);
+
+        sessionsList.appendChild(wrapper);
+    });
+}
+
+        async function renameCurrentSession() {
+            const title = document.getElementById("session-title");
+
+            const currentName = title.textContent.trim();
+
+            const newName = prompt("Rename session:", currentName);
+
+            if (!newName || !newName.trim()) return;
+
+            const response = await fetch(`${API_BASE_URL}/sessions/${SESSION_ID}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: newName.trim()
+                })
+            });
+
+            const updatedSession = await response.json();
+
+            title.textContent = updatedSession.name;
+
+            localStorage.setItem("active_session_name", updatedSession.name);
+
+            loadSessions();
+        }
+
+        document.getElementById("session-title").addEventListener(
+            "dblclick",
+            renameCurrentSession
+        );
+
+        const recentSessionsToggle = document.getElementById("recent-sessions-toggle");
+        const sessionsListElement = document.getElementById("sessions-list");
+        const recentSessionsArrow = document.getElementById("recent-sessions-arrow");
+
+        recentSessionsToggle.addEventListener("click", () => {
+            sessionsListElement.classList.toggle("hidden");
+            recentSessionsArrow.classList.toggle("rotate-180");
+        });
+
+        function showSourceModal(text) {
+            const modal = document.getElementById("source-modal");
+            const content = document.getElementById("source-modal-content");
+
+            content.textContent = text || "No preview available";
+            modal.classList.remove("hidden");
+        }
+
+        function closeSourceModal() {
+            const modal = document.getElementById("source-modal");
+            modal.classList.add("hidden");
+        }
+
+        document.getElementById("close-source-modal").addEventListener("click", closeSourceModal);
+
+        document.getElementById("source-modal").addEventListener("click", (event) => {
+            if (event.target.id === "source-modal") {
+                closeSourceModal();
+            }
+        });
+
+        loadCurrentSession();
+        loadSessions();
     </script>
+
+</body>
+
+</html>
 </body>
 
 </html>

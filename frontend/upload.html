@@ -339,7 +339,7 @@
 </div>
 </footer>
 </div>
-<input id="file-input" type="file" accept=".pdf" class="hidden" />
+<input id="file-input" type="file" accept=".pdf" class="hidden" multiple />
 
 <!-- Micro-interaction Scripts -->
 <script>
@@ -366,25 +366,28 @@ uploadButtons.forEach(button => {
 });
 
 fileInput.addEventListener("change", async () => {
+    const files = Array.from(fileInput.files);
 
-    const file = fileInput.files[0];
+    if (files.length === 0) return;
 
-    if (!file) return;
+    for (const file of files) {
+        const formData = new FormData();
+        formData.append("file", file);
 
-    const formData = new FormData();
-    formData.append("file", file);
+        const response = await fetch(
+            `${API_BASE_URL}/sessions/${SESSION_ID}/upload`,
+            {
+                method: "POST",
+                body: formData
+            }
+        );
 
-    const response = await fetch(
-        `${API_BASE_URL}/sessions/${SESSION_ID}/upload`,
-        {
-            method: "POST",
-            body: formData
-        }
-    );
+        const data = await response.json();
 
-    const data = await response.json();
+        console.log(`${file.name}:`, data.message);
+    }
 
-    alert(data.message);
+    alert(`${files.length} file(s) uploaded and indexed successfully`);
 
     window.location.href =
         `chat.html?session_id=${SESSION_ID}`;

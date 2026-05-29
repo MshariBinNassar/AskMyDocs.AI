@@ -2,7 +2,12 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 import ollama
 
-from app.services.session_store import get_session
+from app.services.session_store import (
+    get_session,
+    add_message_to_session,
+    rename_session
+)
+
 from app.services.embeddings import create_embedding
 from app.services.vector_store import search_chunks
 
@@ -13,6 +18,22 @@ router = APIRouter(prefix="/sessions", tags=["Chat"])
 class ChatRequest(BaseModel):
     question: str
 
+def generate_session_name(question: str) -> str:
+    q = question.lower()
+
+    if "certification" in q or "certifications" in q or "certs" in q:
+        return "Cloud Certifications"
+
+    if "cv" in q or "resume" in q:
+        return "CV Review"
+
+    if "experience" in q:
+        return "Work Experience"
+
+    if "skills" in q:
+        return "Skills Summary"
+
+    return "Document Q&A"
 
 @router.post("/{session_id}/chat")
 def chat_with_session(
@@ -23,6 +44,9 @@ def chat_with_session(
 
     if session is None:
         raise HTTPException(status_code=404, detail="Session not found")
+    if session.get("name") == "New Session":
+        auto_name = generate_session_name(request.question)
+        rename_session(session_id, auto_name)
 
     question_embedding = create_embedding(request.question)
 
@@ -42,6 +66,12 @@ def chat_with_session(
         }
 
     context = "\n\n---\n\n".join(documents)
+
+    add_message_to_session(
+    session_id=session_id,
+    role="user",
+    content=request.question
+    )
 
     response = ollama.chat(
         model="krith/qwen2.5-7b-instruct:IQ4_XS",
@@ -68,11 +98,19 @@ Context:
 
     sources = []
 
-    for metadata in metadatas:
+    for index, metadata in enumerate(metadatas):
         sources.append({
-            "filename": metadata.get("filename", "Unknown file"),
-            "chunk_index": metadata.get("chunk_index", 0)
-        })
+        "filename": metadata.get("filename", "Unknown file"),
+        "chunk_index": metadata.get("chunk_index", 0),
+        "preview": documents[index]
+    })
+
+    add_message_to_session(
+        session_id=session_id,
+        role="assistant",
+        content=response["message"]["content"],
+        sources=sources
+    )
 
     return {
         "answer": response["message"]["content"],

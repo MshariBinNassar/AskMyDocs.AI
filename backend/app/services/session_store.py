@@ -11,11 +11,12 @@ def create_session(name: str | None = None):
     session_id = str(uuid4())
 
     session_data = {
-        "session_id": session_id,
-        "name": name or "New Session",
-        "created_at": datetime.utcnow().isoformat(),
-        "files": []
-    }
+    "session_id": session_id,
+    "name": name or "New Session",
+    "created_at": datetime.utcnow().isoformat(),
+    "files": [],
+    "messages": []
+}
 
     session_file = SESSIONS_DIR / f"{session_id}.json"
 
@@ -36,6 +37,8 @@ def get_session(session_id: str):
 
 
 def save_session(session_data: dict):
+    session_data["updated_at"] = datetime.utcnow().isoformat()
+
     session_file = SESSIONS_DIR / f"{session_data['session_id']}.json"
 
     with session_file.open("w", encoding="utf-8") as f:
@@ -58,6 +61,60 @@ def list_sessions():
 
     for file in SESSIONS_DIR.glob("*.json"):
         with file.open("r", encoding="utf-8") as f:
-            sessions.append(json.load(f))
+            session = json.load(f)
+            sessions.append(session)
+
+    sessions.sort(
+        key=lambda session: session.get("updated_at", session.get("created_at", "")),
+        reverse=True
+    )
 
     return sessions
+
+def add_message_to_session(
+    session_id: str,
+    role: str,
+    content: str,
+    sources: list | None = None
+):
+    session_data = get_session(session_id)
+
+    if session_data is None:
+        return None
+
+    if "messages" not in session_data:
+        session_data["messages"] = []
+
+    message = {
+        "role": role,
+        "content": content,
+        "created_at": datetime.utcnow().isoformat(),
+        "sources": sources or []
+    }
+
+    session_data["messages"].append(message)
+
+    save_session(session_data)
+
+    return message
+
+def rename_session(session_id: str, name: str):
+    session_data = get_session(session_id)
+
+    if session_data is None:
+        return None
+
+    session_data["name"] = name
+    save_session(session_data)
+
+    return session_data
+
+def delete_session(session_id: str):
+    session_file = SESSIONS_DIR / f"{session_id}.json"
+
+    if not session_file.exists():
+        return False
+
+    session_file.unlink()
+    return True
+

@@ -3,16 +3,14 @@ from pydantic import BaseModel
 from pathlib import Path
 from uuid import uuid4
 import shutil
+
 from app.services.session_store import (
     create_session,
     get_session,
     add_file_to_session,
-    list_sessions
-)
-from app.services.session_store import (
-    create_session,
-    get_session,
-    add_file_to_session
+    list_sessions,
+    rename_session,
+    delete_session
 )
 
 from app.services.document_loader import extract_pdf_text
@@ -103,3 +101,36 @@ def get_session_details(session_id: str):
         )
 
     return session
+
+class RenameSessionRequest(BaseModel):
+    name: str
+
+
+@router.patch("/{session_id}")
+def rename_existing_session(
+    session_id: str,
+    request: RenameSessionRequest
+):
+    session = rename_session(session_id, request.name)
+
+    if session is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Session not found"
+        )
+
+    return session
+
+@router.delete("/{session_id}")
+def delete_existing_session(session_id: str):
+    deleted = delete_session(session_id)
+
+    if not deleted:
+        raise HTTPException(
+            status_code=404,
+            detail="Session not found"
+        )
+
+    return {
+        "message": "Session deleted successfully"
+    }
