@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AskMyDocs.AI - Legal Contract Review</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-fixed": "#dbe1ff",
+                      "on-secondary-container": "#596372",
+                      "outline-variant": "#c3c6d7",
+                      "error": "#ba1a1a",
+                      "surface-bright": "#f8f9fa",
+                      "on-tertiary-container": "#ffede6",
+                      "on-background": "#191c1d",
+                      "on-tertiary-fixed-variant": "#7d2d00",
+                      "primary-container": "#2563eb",
+                      "on-surface-variant": "#434655",
+                      "tertiary-container": "#bc4800",
+                      "on-primary-container": "#eeefff",
+                      "on-tertiary-fixed": "#360f00",
+                      "secondary-container": "#d6e0f1",
+                      "surface-tint": "#0053db",
+                      "on-error-container": "#93000a",
+                      "surface-container-lowest": "#ffffff",
+                      "surface": "#f8f9fa",
+                      "on-secondary-fixed-variant": "#3e4755",
+                      "inverse-primary": "#b4c5ff",
+                      "outline": "#737686",
+                      "background": "#f8f9fa",
+                      "surface-variant": "#e1e3e4",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-fixed": "#121c28",
+                      "tertiary-fixed": "#ffdbcd",
+                      "inverse-surface": "#2e3132",
+                      "inverse-on-surface": "#f0f1f2",
+                      "surface-container-high": "#e7e8e9",
+                      "on-primary-fixed": "#00174b",
+                      "tertiary-fixed-dim": "#ffb596",
+                      "secondary-fixed": "#d9e3f4",
+                      "surface-dim": "#d9dadb",
+                      "surface-container-highest": "#e1e3e4",
+                      "surface-container": "#edeeef",
+                      "on-surface": "#191c1d",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "tertiary": "#943700",
+                      "on-error": "#ffffff",
+                      "secondary": "#555f6d",
+                      "on-primary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed-dim": "#bdc7d8",
+                      "primary": "#004ac6",
+                      "surface-container-low": "#f3f4f5"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "container-padding": "24px",
+                      "sidebar-width": "260px",
+                      "max-content-width": "800px",
+                      "gutter": "16px",
+                      "unit": "4px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "label-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-sm": ["18px", {"lineHeight": "26px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 1;
+        }
+        .pulse-soft {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E5E7EB;
+            border-radius: 10px;
+        }
+        .custom-shadow {
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-surface antialiased">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-[260px] bg-surface-container-low border-r border-outline-variant flex flex-col h-full py-6">
+<div class="px-6 mb-8">
+<h1 class="font-headline-sm text-headline-sm font-bold text-on-surface">AskMyDocs.AI</h1>
+<p class="font-label-md text-label-md text-secondary">Local AI Assistant</p>
+</div>
+<div class="px-4 mb-6">
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-2.5 rounded-xl font-label-md transition-opacity hover:opacity-90">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Session
+            </button>
+</div>
+<nav class="flex-1 overflow-y-auto">
+<div class="px-3 space-y-1">
+<!-- Active Item -->
+<a class="flex items-center gap-3 px-4 py-2 border-l-4 border-primary text-primary bg-secondary-container/30 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label-md truncate">Legal Contract Review (4 files)</span>
+</a>
+<!-- Inactive Items -->
+<a class="flex items-center gap-3 px-4 py-2 text-secondary hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+<span class="font-label-md">Shared Documents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-secondary hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="star">star</span>
+<span class="font-label-md">Favorites</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-secondary hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="archive">archive</span>
+<span class="font-label-md">Archive</span>
+</a>
+</div>
+</nav>
+<div class="mt-auto px-4 pt-4 border-t border-outline-variant/30">
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-variant/50 transition-colors cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[20px]">person</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-label-md font-semibold truncate">User profile</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Shell -->
+<div class="ml-[260px] flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center h-16 px-container-padding border-b border-outline-variant bg-surface sticky top-0 z-10">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Legal Contract Review</h2>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-primary text-on-primary px-4 py-2 rounded-xl font-label-md hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">upload_file</span>
+                    Upload Files
+                </button>
+<div class="flex items-center gap-1 border-l border-outline-variant ml-2 pl-3">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 flex flex-col items-center p-8 bg-surface-container-lowest">
+<div class="w-full max-w-max-content-width">
+<!-- Bento Header Stats (Optional contextual touch) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+<div class="p-4 bg-surface border border-outline-variant rounded-xl flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<p class="text-label-sm text-secondary uppercase tracking-wider">Total Files</p>
+<p class="text-headline-sm font-bold">4</p>
+</div>
+</div>
+<div class="p-4 bg-surface border border-outline-variant rounded-xl flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">pending_actions</span>
+</div>
+<div>
+<p class="text-label-sm text-secondary uppercase tracking-wider">In Progress</p>
+<p class="text-headline-sm font-bold">1</p>
+</div>
+</div>
+<div class="p-4 bg-surface border border-outline-variant rounded-xl flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div>
+<p class="text-label-sm text-secondary uppercase tracking-wider">Issues</p>
+<p class="text-headline-sm font-bold">1</p>
+</div>
+</div>
+</div>
+<!-- File List Section -->
+<div class="bg-surface rounded-xl border border-outline-variant overflow-hidden mb-12">
+<div class="px-6 py-4 border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
+<h3 class="font-headline-sm text-[16px] text-on-surface-variant">Processing Queue</h3>
+<span class="text-label-sm text-secondary">Updated 1m ago</span>
+</div>
+<div class="divide-y divide-outline-variant/40">
+<!-- File Row: Ready -->
+<div class="px-6 py-4 flex items-center group hover:bg-surface-container-lowest transition-colors">
+<div class="flex-1 flex items-center gap-4 min-w-0">
+<span class="material-symbols-outlined text-secondary">picture_as_pdf</span>
+<div class="truncate">
+<p class="font-body-md font-medium text-on-surface truncate">Master_Service_Agreement.pdf</p>
+<p class="text-label-sm text-secondary">1.2 MB • PDF Document</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-100 text-green-700 text-label-sm border border-green-200">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                    Ready
+                                </span>
+<button class="p-1.5 text-secondary hover:text-error opacity-0 group-hover:opacity-100 transition-all rounded-lg hover:bg-error-container/20">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- File Row: Indexing -->
+<div class="px-6 py-4 flex items-center group hover:bg-surface-container-lowest transition-colors">
+<div class="flex-1 flex items-center gap-4 min-w-0">
+<span class="material-symbols-outlined text-secondary">article</span>
+<div class="truncate">
+<p class="font-body-md font-medium text-on-surface truncate">Privacy_Policy_V2.docx</p>
+<p class="text-label-sm text-secondary">854 KB • Word Document</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-fixed/50 text-primary text-label-sm border border-primary/20 pulse-soft">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+                                    Indexing
+                                </span>
+<button class="p-1.5 text-secondary hover:text-error opacity-0 group-hover:opacity-100 transition-all rounded-lg hover:bg-error-container/20">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- File Row: Uploaded -->
+<div class="px-6 py-4 flex items-center group hover:bg-surface-container-lowest transition-colors">
+<div class="flex-1 flex items-center gap-4 min-w-0">
+<span class="material-symbols-outlined text-secondary">markdown</span>
+<div class="truncate">
+<p class="font-body-md font-medium text-on-surface truncate">NDA_Template.md</p>
+<p class="text-label-sm text-secondary">12 KB • Markdown</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-variant text-secondary text-label-sm border border-outline-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                    Uploaded
+                                </span>
+<button class="p-1.5 text-secondary hover:text-error opacity-0 group-hover:opacity-100 transition-all rounded-lg hover:bg-error-container/20">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- File Row: Failed -->
+<div class="px-6 py-4 flex items-center group hover:bg-surface-container-lowest transition-colors">
+<div class="flex-1 flex items-center gap-4 min-w-0">
+<span class="material-symbols-outlined text-secondary">text_snippet</span>
+<div class="truncate">
+<p class="font-body-md font-medium text-on-surface truncate">Invalid_Draft.txt</p>
+<p class="text-label-sm text-secondary">0 KB • Empty File</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-error-container text-error text-label-sm border border-error/20">
+<span class="material-symbols-outlined text-[14px]">error</span>
+                                    Failed
+                                </span>
+<button class="p-1.5 text-secondary hover:text-error opacity-0 group-hover:opacity-100 transition-all rounded-lg hover:bg-error-container/20">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Guidance Empty State (When wait list is long) -->
+<div class="text-center py-10 opacity-60">
+<p class="text-body-md text-on-surface-variant">Your documents are being securely processed locally. <br/> Large files may take a few moments to be fully searchable.</p>
+</div>
+</div>
+</main>
+<!-- Chat Interface (Fixed Bottom) -->
+<footer class="sticky bottom-0 w-full bg-surface/80 backdrop-blur-md border-t border-outline-variant/30 p-6 flex justify-center">
+<div class="w-full max-w-max-content-width relative">
+<div class="bg-surface-container rounded-full px-6 py-3 border border-outline-variant flex items-center gap-3 opacity-50 cursor-not-allowed">
+<span class="material-symbols-outlined text-secondary">smart_toy</span>
+<p class="flex-1 text-on-surface-variant font-body-md italic select-none">
+                        Waiting for indexing to complete...
+                    </p>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 0s"></div>
+<div class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+<div class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+</div>
+</div>
+<!-- Overlaid message for clarity -->
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap bg-inverse-surface text-inverse-on-surface text-label-sm px-3 py-1 rounded-lg custom-shadow">
+                    Index in progress (50%)
+                </div>
+</div>
+</footer>
+</div>
+<input id="file-input" type="file" accept=".pdf" class="hidden" />
+
+<!-- Micro-interaction Scripts -->
+<script>
+const API_BASE_URL = "http://127.0.0.1:8000";
+
+const params = new URLSearchParams(window.location.search);
+
+const SESSION_ID =
+    params.get("session_id") ||
+    localStorage.getItem("active_session_id");
+
+const fileInput = document.getElementById("file-input");
+
+const uploadButtons = Array.from(
+    document.querySelectorAll("button")
+).filter(button =>
+    button.textContent.includes("Upload Files")
+);
+
+uploadButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        fileInput.click();
+    });
+});
+
+fileInput.addEventListener("change", async () => {
+
+    const file = fileInput.files[0];
+
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch(
+        `${API_BASE_URL}/sessions/${SESSION_ID}/upload`,
+        {
+            method: "POST",
+            body: formData
+        }
+    );
+
+    const data = await response.json();
+
+    alert(data.message);
+
+    window.location.href =
+        `chat.html?session_id=${SESSION_ID}`;
+});
+</script>
+</body></html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AskMyDocs.AI - Active Session</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #E5E7EB;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D1D5DB;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#dbe1ff",
+                        "on-secondary-container": "#596372",
+                        "outline-variant": "#c3c6d7",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#f8f9fa",
+                        "on-tertiary-container": "#ffede6",
+                        "on-background": "#191c1d",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "primary-container": "#2563eb",
+                        "on-surface-variant": "#434655",
+                        "tertiary-container": "#bc4800",
+                        "on-primary-container": "#eeefff",
+                        "on-tertiary-fixed": "#360f00",
+                        "secondary-container": "#d6e0f1",
+                        "surface-tint": "#0053db",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f8f9fa",
+                        "on-secondary-fixed-variant": "#3e4755",
+                        "inverse-primary": "#b4c5ff",
+                        "outline": "#737686",
+                        "background": "#f8f9fa",
+                        "surface-variant": "#e1e3e4",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#121c28",
+                        "tertiary-fixed": "#ffdbcd",
+                        "inverse-surface": "#2e3132",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-container-high": "#e7e8e9",
+                        "on-primary-fixed": "#00174b",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "secondary-fixed": "#d9e3f4",
+                        "surface-dim": "#d9dadb",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-container": "#edeeef",
+                        "on-surface": "#191c1d",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "tertiary": "#943700",
+                        "on-error": "#ffffff",
+                        "secondary": "#555f6d",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#bdc7d8",
+                        "primary": "#004ac6",
+                        "surface-container-low": "#f3f4f5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-padding": "24px",
+                        "sidebar-width": "260px",
+                        "max-content-width": "800px",
+                        "gutter": "16px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+    <!-- Sidebar Component (SideNavBar) -->
+    <aside
+        class="fixed left-0 top-0 h-screen w-[260px] bg-surface-container-low border-r border-outline-variant flex flex-col py-6">
+        <div class="px-6 mb-8 flex items-center gap-3">
+            <div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+                <span class="material-symbols-outlined text-white text-[20px]"
+                    data-icon="description">description</span>
+            </div>
+            <div>
+                <h1 class="font-headline-sm text-headline-sm font-bold text-on-surface">AskMyDocs.AI</h1>
+                <p class="font-label-md text-label-md text-on-surface-variant">Local AI Assistant</p>
+            </div>
+        </div>
+        <div class="px-4 mb-6">
+            <button
+                class="w-full flex items-center justify-center gap-2 bg-white border border-outline-variant py-2 rounded shadow-sm hover:bg-surface-container transition-colors font-label-md text-label-md text-on-surface">
+                <span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                New Session
+            </button>
+        </div>
+        <nav class="flex-1 overflow-y-auto space-y-1">
+            <div class="px-4 py-2">
+                <h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider px-2 mb-2">
+                    Navigation</h3>
+                <!-- Recent Sessions (Active) -->
+                <a class="flex items-center gap-3 px-4 py-2 border-l-4 border-primary text-primary bg-secondary-container/30 transition-opacity hover:bg-surface-variant/50"
+                    href="#">
+                    <span class="material-symbols-outlined" data-icon="history">history</span>
+                    <span class="font-label-md text-label-md">Recent Sessions</span>
+                </a>
+                <!-- Active Sub-Item for "Product Specs & Research" -->
+                <div class="ml-10 mt-1 mb-2 space-y-1">
+                    <a class="block px-2 py-1.5 text-primary font-medium text-label-md border-l border-primary/20 bg-primary/5 rounded-r"
+                        href="#">
+                        Product Specs &amp; Research
+                    </a>
+                    <a class="block px-2 py-1.5 text-secondary hover:text-on-surface transition-colors text-label-md"
+                        href="#">
+                        Q4 Strategy Deck
+                    </a>
+                </div>
+                <a class="flex items-center gap-3 px-4 py-2 text-secondary hover:bg-surface-variant/50 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+                    <span class="font-label-md text-label-md">Shared Documents</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-2 text-secondary hover:bg-surface-variant/50 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined" data-icon="star">star</span>
+                    <span class="font-label-md text-label-md">Favorites</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-2 text-secondary hover:bg-surface-variant/50 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined" data-icon="archive">archive</span>
+                    <span class="font-label-md text-label-md">Archive</span>
+                </a>
+            </div>
+        </nav>
+        <div class="mt-auto px-6 pt-6 border-t border-outline-variant flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+                <img alt="User profile" class="w-full h-full object-cover"
+                    data-alt="A clean, minimalist 2D avatar profile picture of a young professional male in a modern tech setting. The image uses a soft palette of blues and grays, matching a professional light-mode UI aesthetic. The style is flat illustration, friendly and approachable, consistent with a modern AI productivity tool."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRwl0p-JPGJU3Te8vmwODgVp554KCKRfvVLgBz7xkgAGF07FCWmpkjAQwhKkJmisKp3WtZnXxZRmfXRDAHtz3kCjLQHzkVy-Nnv8pB7LwgAJAEhxZBIsqGvedDlx9Gyn6fzJriULAf2tNmgpyuX2nHVOc9qIH_Ndt2m-QkzO7pBm9T0pGnYIzAOEGgCXf2RDWwODOkJAZAPHcmi7W5JoJOXiDKNO22QCZx3I9w551OsPQjyqlzMh0HOeHHlzlDVy2rguE8Lq773LE" />
+            </div>
+            <div class="flex-1 min-w-0">
+                <p class="font-label-md text-label-md text-on-surface truncate">Alex Rivera</p>
+                <p class="font-label-sm text-label-sm text-on-surface-variant truncate">Pro Plan</p>
+            </div>
+            <span
+                class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-on-surface transition-colors"
+                data-icon="settings">settings</span>
+        </div>
+    </aside>
+    <!-- Main Content Area -->
+    <main class="ml-[260px] flex flex-col min-h-screen bg-white">
+        <!-- TopNavBar Component -->
+        <header
+            class="sticky top-0 z-10 bg-white/80 backdrop-blur-md flex justify-between items-center h-16 px-container-padding border-b border-outline-variant">
+            <div class="flex items-center gap-4">
+                <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Product Specs &amp; Research
+                </h2>
+                <div class="flex items-center gap-1.5 px-2.5 py-1 bg-surface-container rounded-full text-secondary">
+                    <span class="material-symbols-outlined text-[16px]" data-icon="description">description</span>
+                    <span class="font-label-sm text-label-sm">3 Files</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="flex -space-x-2 mr-2">
+                    <img alt="File PRD" class="w-6 h-6 rounded-sm border border-white"
+                        data-alt="A small digital document icon representing a PDF file labeled PRD. The visual style is minimalist and high-contrast, fitting within a professional workspace UI. The background is a crisp white, and the icon features professional typography with subtle gray borders."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDznI4SbkV62twusEKVPFdVV0fex_FIhNxeNyhRnG9dzuAeWa5KIbFfLkMG2OFfi3wYX_nCNja0auB0hg5zEPwbdwNfkLAeojRE_HlwATXoG4ToCCgz4AFD6me0TmcFBfhNm4RTK_kb1AOY6iEsmyIRluiRa0PBcG-K2J1gygvbztLXQ9XcXpxeYpHfFOpU_RL5k8pyaqBuYQwhI_PTEwiKdurhpQ_0MY9xrsMEZbstDKfMpWHlKfYj131DBP50fNMMl9NH4vbKUgY" />
+                    <img alt="File Technical Spec" class="w-6 h-6 rounded-sm border border-white"
+                        data-alt="A sleek digital file icon for a Technical Specification document. The design is clean and corporate, featuring a structured layout of simulated code lines on a light gray background. It follows a minimalist Apple-inspired aesthetic, suitable for a professional document management system."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmgLRu4VaVxaR1TtOfMZKYgIKi6KunIzxh2antw7wAcc9sBpCSn0XURW6IQcOS74SzOJsJ1bv87JbF0i7-1GyOwznyEFAeM6lPo54xl1lOUKu37S-Rkdnc2Q79igmdhhFuq6GA-E2R35OWLpfPkAfjxhRP5TZqKR3xRhfYkyE-3V9Ph-zBerr6Jktn_J__sLR2D09tMLWpYFoHdBvQsryj5cvJijDSOrtgKM1d4lJdCN3VVn0HZmABiE_PGQaGxB1Td6Bw2Frj_TU" />
+                </div>
+                <button
+                    class="flex items-center gap-2 bg-primary text-white px-4 py-1.5 rounded-lg font-label-md text-label-md hover:opacity-90 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined text-[18px]" data-icon="upload">upload</span>
+                    Upload Files
+                </button>
+                <button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined" data-icon="help">help</span>
+                </button>
+            </div>
+        </header>
+        <!-- Chat Workspace -->
+        <section class="flex-1 overflow-y-auto px-container-padding py-10">
+            <div class="max-w-[800px] mx-auto space-y-12">
+                <!-- Initial Helper State (Optional, but adds depth) -->
+                <div class="text-center space-y-4 mb-16 opacity-50">
+                    <div class="w-12 h-12 bg-surface-container rounded-xl mx-auto flex items-center justify-center">
+                        <span class="material-symbols-outlined text-on-surface-variant"
+                            data-icon="auto_awesome">auto_awesome</span>
+                    </div>
+                    <p class="font-label-md text-label-md max-w-sm mx-auto">This session includes PRD.pdf,
+                        Technical_Spec.md, and Research_Notes.docx. Ask anything about their contents.</p>
+                </div>
+                <!-- User Message -->
+                <div class="flex flex-col items-end gap-2 group">
+                    <div
+                        class="max-w-[85%] bg-surface-container-low px-5 py-4 rounded-xl text-on-surface border border-outline-variant/30">
+                        <p class="font-body-lg text-body-lg">What are the main constraints for the local storage
+                            implementation?</p>
+                    </div>
+                    <span class="text-label-sm text-on-surface-variant/60 font-label-sm pr-2">Sent 10:24 AM</span>
+                </div>
+                <!-- AI Response Message -->
+                <div class="flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1 border border-primary/20">
+                            <span class="material-symbols-outlined text-primary text-[20px]"
+                                data-icon="smart_toy">smart_toy</span>
+                        </div>
+                        <div class="flex-1 space-y-4">
+                            <div class="prose prose-sm max-w-none text-on-surface">
+                                <p class="font-body-lg text-body-lg leading-relaxed">Based on the provided
+                                    documentation, the local storage implementation is subject to several key technical
+                                    and security constraints:</p>
+                                <ul class="list-disc pl-5 space-y-2 mt-3 font-body-md text-body-md">
+                                    <li><strong>Capacity Limit:</strong> The browser-side persistence is capped at 50MB
+                                        per origin to ensure compatibility across older mobile Safari versions.</li>
+                                    <li><strong>Encryption:</strong> All locally stored snippets must be encrypted using
+                                        AES-256-GCM before writing to IndexedDB.</li>
+                                    <li><strong>Latency:</strong> Read operations must complete within &lt;100ms to
+                                        avoid UI jank during document indexing.</li>
+                                    <li><strong>Persistence:</strong> Sensitive user metadata cannot be cached
+                                        permanently and must expire after the session token invalidates.</li>
+                                </ul>
+                            </div>
+                            <!-- Sources Section -->
+                            <div class="pt-4 border-t border-outline-variant/40">
+                                <p
+                                    class="font-label-sm text-label-sm text-on-surface-variant mb-3 flex items-center gap-1.5">
+                                    <span class="material-symbols-outlined text-[14px]"
+                                        data-icon="library_books">library_books</span>
+                                    SOURCES
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <button
+                                        class="group flex items-center gap-2 px-3 py-1.5 bg-surface-container-high/50 hover:bg-primary/5 border border-outline-variant/30 rounded-lg transition-all">
+                                        <span
+                                            class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-primary"
+                                            data-icon="picture_as_pdf">picture_as_pdf</span>
+                                        <span class="font-label-md text-label-md text-on-surface">PRD.pdf (Page
+                                            4)</span>
+                                    </button>
+                                    <button
+                                        class="group flex items-center gap-2 px-3 py-1.5 bg-surface-container-high/50 hover:bg-primary/5 border border-outline-variant/30 rounded-lg transition-all">
+                                        <span
+                                            class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-primary"
+                                            data-icon="description">description</span>
+                                        <span
+                                            class="font-label-md text-label-md text-on-surface">Technical_Spec.md</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Input Area Component -->
+        <footer class="p-container-padding pb-8">
+            <div class="max-w-[800px] mx-auto relative group">
+                <!-- Floating Indicator for Context -->
+                <div
+                    class="absolute -top-8 left-4 flex items-center gap-2 opacity-0 group-focus-within:opacity-100 transition-opacity">
+                    <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+                    <span class="text-label-sm font-label-sm text-on-surface-variant">AI is ready to analyze 3
+                        documents</span>
+                </div>
+                <div
+                    class="bg-white border border-outline-variant rounded-xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08)] focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all overflow-hidden">
+                    <div class="flex items-end p-2 gap-2">
+                        <button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+                            <span class="material-symbols-outlined" data-icon="attach_file">attach_file</span>
+                        </button>
+                        <textarea
+                            class="flex-1 py-2 px-1 bg-transparent border-none focus:ring-0 resize-none font-body-md text-body-md placeholder:text-on-surface-variant/50 max-h-[200px]"
+                            oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+                            placeholder="Ask a question about these documents..." rows="1"></textarea>
+                        <button
+                            class="bg-primary text-white p-2 rounded-lg hover:opacity-90 active:scale-95 transition-all shadow-md">
+                            <span class="material-symbols-outlined" data-icon="send">send</span>
+                        </button>
+                    </div>
+                    <div class="px-4 pb-2 flex items-center justify-between">
+                        <div class="flex gap-4">
+                            <span
+                                class="flex items-center gap-1 text-label-sm font-label-sm text-on-surface-variant/70">
+                                <span class="material-symbols-outlined text-[14px]" data-icon="bolt">bolt</span>
+                                Claude 3.5 Sonnet
+                            </span>
+                        </div>
+                        <span class="text-label-sm font-label-sm text-on-surface-variant/40">Use ⌘ + Enter to
+                            send</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script>
+        const API_BASE_URL = "http://127.0.0.1:8000";
+
+        const params = new URLSearchParams(window.location.search);
+
+        const SESSION_ID =
+            params.get("session_id") ||
+            localStorage.getItem("active_session_id");
+
+        const textarea = document.querySelector("textarea");
+
+        const sendButton = document.querySelector(
+            '.material-symbols-outlined[data-icon="send"]'
+        ).parentElement;
+
+        const chatContainer = document.querySelector(
+            "section .max-w-\\[800px\\]"
+        );
+
+        const uploadButtons = Array.from(document.querySelectorAll("button"))
+            .filter(button => button.textContent.includes("Upload Files"));
+
+        uploadButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                window.location.href = `upload.html?session_id=${SESSION_ID}`;
+            });
+        });
+
+        function addUserMessage(question) {
+            const html = `
+        <div class="flex flex-col items-end gap-2 group">
+            <div class="max-w-[85%] bg-surface-container-low px-5 py-4 rounded-xl text-on-surface border border-outline-variant/30">
+                <p class="font-body-lg text-body-lg">${question}</p>
+            </div>
+            <span class="text-label-sm text-on-surface-variant/60 font-label-sm pr-2">Sent now</span>
+        </div>
+    `;
+
+            chatContainer.insertAdjacentHTML("beforeend", html);
+        }
+
+        function addAiMessage(answer, sources = []) {
+            const sourceItems = sources.map((source, index) => {
+                return `
+            <button class="group flex items-center gap-2 px-3 py-1.5 bg-surface-container-high/50 hover:bg-primary/5 border border-outline-variant/30 rounded-lg transition-all">
+                <span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-primary">description</span>
+                <span class="font-label-md text-label-md text-on-surface">
+    ${source.filename || "Unknown file"} - Chunk ${source.chunk_index ?? index}
+</span>
+            </button>
+        `;
+            }).join("");
+
+            const html = `
+        <div class="flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div class="flex items-start gap-4">
+                <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1 border border-primary/20">
+                    <span class="material-symbols-outlined text-primary text-[20px]">smart_toy</span>
+                </div>
+
+                <div class="flex-1 space-y-4">
+                    <div class="prose prose-sm max-w-none text-on-surface">
+                        <p class="font-body-lg text-body-lg leading-relaxed">${answer}</p>
+                    </div>
+
+                    <div class="pt-4 border-t border-outline-variant/40">
+                        <p class="font-label-sm text-label-sm text-on-surface-variant mb-3 flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[14px]">library_books</span>
+                            SOURCES
+                        </p>
+
+                        <div class="flex flex-wrap gap-2">
+                            ${sourceItems || "<span class='text-label-sm text-on-surface-variant'>No sources</span>"}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+            chatContainer.insertAdjacentHTML("beforeend", html);
+        }
+
+        async function sendMessage() {
+            const question = textarea.value.trim();
+
+            if (!question) return;
+
+            addUserMessage(question);
+
+            textarea.value = "";
+            textarea.style.height = "auto";
+
+            const response = await fetch(
+                `${API_BASE_URL}/sessions/${SESSION_ID}/chat`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        question
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            addAiMessage(data.answer, data.sources);
+        }
+
+        sendButton.addEventListener("click", sendMessage);
+
+        textarea.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+
+</html>
