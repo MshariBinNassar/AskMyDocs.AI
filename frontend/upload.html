@@ -347,9 +347,14 @@ const API_BASE_URL = "http://127.0.0.1:8000";
 
 const params = new URLSearchParams(window.location.search);
 
-const SESSION_ID =
-    params.get("session_id") ||
-    localStorage.getItem("active_session_id");
+const SESSION_ID = params.get("session_id");
+
+if (!SESSION_ID) {
+    alert("No session selected. Please create or open a session first.");
+    window.location.href = "index.html";
+}
+
+localStorage.setItem("active_session_id", SESSION_ID);
 
 const fileInput = document.getElementById("file-input");
 
@@ -382,6 +387,12 @@ fileInput.addEventListener("change", async () => {
             }
         );
 
+        if (!response.ok) {
+            const errorText = await response.text();
+            alert(`Failed to upload ${file.name}: ${errorText}`);
+            return;
+        }
+
         const data = await response.json();
 
         console.log(`${file.name}:`, data.message);
@@ -389,8 +400,10 @@ fileInput.addEventListener("change", async () => {
 
     alert(`${files.length} file(s) uploaded and indexed successfully`);
 
-    window.location.href =
-        `chat.html?session_id=${SESSION_ID}`;
+    window.location.href = `chat.html?session_id=${SESSION_ID}`;
+});
+window.addEventListener("load", () => {
+    fileInput.click();
 });
 </script>
 </body></html>

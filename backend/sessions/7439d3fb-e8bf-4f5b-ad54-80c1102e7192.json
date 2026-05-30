@@ -1,0 +1,45 @@
+{
+  "session_id": "7439d3fb-e8bf-4f5b-ad54-80c1102e7192",
+  "name": "Skills Summary",
+  "created_at": "2026-05-30T15:59:25.451119",
+  "files": [
+    {
+      "file_id": "ef54b79c-6586-4c2a-a6c8-63a4cdeaa905",
+      "filename": "MshariBin-Nassar-CV.pdf",
+      "path": "uploads\\ef54b79c-6586-4c2a-a6c8-63a4cdeaa905_MshariBin-Nassar-CV.pdf",
+      "chunks_count": 7,
+      "status": "indexed"
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "how many Microsoft Office skills does meshari have ?",
+      "created_at": "2026-05-30T15:59:35.425346",
+      "sources": []
+    },
+    {
+      "role": "assistant",
+      "content": "Based on the context provided, Mshari Naif Bin Nassar has experience with Microsoft Project. The document does not explicitly list other Microsoft Office skills he possesses. Therefore, we can conclude that at least one Microsoft Office skill (Microsoft Project) is mentioned for him.",
+      "created_at": "2026-05-30T15:59:41.278878",
+      "sources": [
+        {
+          "filename": "MshariBin-Nassar-CV.pdf",
+          "chunk_index": 0,
+          "preview": "Mshari Naif Bin Nassar \nRiyadh, Saudi Arabia | +966553305757| MshariBinNassar@gmail.com | LinkedIn Profile \nSummary \n  Recent IT graduate with a solid understanding of technology and problem-solving skills. Skilled in Python, SQL, and \nPower BI, with hands-on experience in data management and system development. Eager to apply my knowledge in \nreal-world projects, work with teams, and contribute to the success of the organization. \nEducation \n\u25aa Bachelor\u2019s Degree in Information Technology        "
+        },
+        {
+          "filename": "MshariBin-Nassar-CV.pdf",
+          "chunk_index": 2,
+          "preview": "ption: I worked (As an assistant with ERP Admin) in different Oracle modules (Finance, HR, and Supply \nChain) managing the daily activities such as: \n\u2022 Data Entry: Input financial data into Oracle for payroll, tax, or general invoices. \n\u2022 Employee Data Management: Update employee records, including personal details, job positions, and \nbenefits. \n\u2022 User Support: Provide basic support to users for some Oracle-related queries. \n \n In addition, analyzing data using Excel and building dashboards. \nP"
+        },
+        {
+          "filename": "MshariBin-Nassar-CV.pdf",
+          "chunk_index": 6,
+          "preview": "i, Microsoft Project.  \n\u2022 Soft Skills: Teamwork, Problem solving, communication, Flexibility, Creativity, Self-motivation, \nQuick Learner and continuously developing.\n \nLanguages \nArabic - Native | English \u2013 Advanced. \n"
+        }
+      ]
+    }
+  ],
+  "updated_at": "2026-05-30T15:59:41.278878"
+}

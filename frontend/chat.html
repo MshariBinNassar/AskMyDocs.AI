@@ -315,30 +315,73 @@
     <script>
         const API_BASE_URL = "http://127.0.0.1:8000";
 
-        const params = new URLSearchParams(window.location.search);
+const params = new URLSearchParams(window.location.search);
 
-        const SESSION_ID =
-            params.get("session_id") ||
-            localStorage.getItem("active_session_id");
+const SESSION_ID =
+    params.get("session_id") ||
+    localStorage.getItem("active_session_id");
 
-        const textarea = document.querySelector("textarea");
+const textarea = document.querySelector("textarea");
 
-        const sendButton = document.querySelector(
-            '.material-symbols-outlined[data-icon="send"]'
-        ).parentElement;
+const sendButton = document.querySelector(
+    '.material-symbols-outlined[data-icon="send"]'
+).parentElement;
 
-        const chatContainer = document.querySelector(
-            "section .max-w-\\[800px\\]"
+const chatContainer = document.querySelector(
+    "section .max-w-\\[800px\\]"
+);
+
+let fileInput = document.getElementById("file-input");
+
+if (!fileInput) {
+    fileInput = document.createElement("input");
+    fileInput.id = "file-input";
+    fileInput.type = "file";
+    fileInput.accept = ".pdf";
+    fileInput.multiple = true;
+    fileInput.className = "hidden";
+    document.body.appendChild(fileInput);
+}
+
+const uploadButtons = Array.from(document.querySelectorAll("button"))
+    .filter(button => button.textContent.includes("Upload Files"));
+
+uploadButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        fileInput.click();
+    });
+});
+
+fileInput.addEventListener("change", async () => {
+    const files = Array.from(fileInput.files);
+
+    if (files.length === 0) return;
+
+    for (const file of files) {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        const response = await fetch(
+            `${API_BASE_URL}/sessions/${SESSION_ID}/upload`,
+            {
+                method: "POST",
+                body: formData
+            }
         );
 
-        const uploadButtons = Array.from(document.querySelectorAll("button"))
-            .filter(button => button.textContent.includes("Upload Files"));
+        if (!response.ok) {
+            const errorText = await response.text();
+            alert(`Failed to upload ${file.name}: ${errorText}`);
+            return;
+        }
+    }
 
-        uploadButtons.forEach(button => {
-            button.addEventListener("click", () => {
-                window.location.href = `upload.html?session_id=${SESSION_ID}`;
-            });
-        });
+    alert(`${files.length} file(s) uploaded and indexed successfully`);
+
+    fileInput.value = "";
+
+    loadCurrentSession();
+});
 
         function addUserMessage(question) {
             const html = `
@@ -495,93 +538,93 @@
             }
         });
 
-       async function loadSessions() {
-    const response = await fetch(`${API_BASE_URL}/sessions/`);
-    const sessions = await response.json();
+        async function loadSessions() {
+            const response = await fetch(`${API_BASE_URL}/sessions/`);
+            const sessions = await response.json();
 
-    const sessionsList = document.getElementById("sessions-list");
+            const sessionsList = document.getElementById("sessions-list");
 
-    if (!sessionsList) return;
+            if (!sessionsList) return;
 
-    sessionsList.className = "mt-1 mb-2 space-y-1";
-    sessionsList.innerHTML = "";
+            sessionsList.className = "mt-1 mb-2 space-y-1";
+            sessionsList.innerHTML = "";
 
-    sessions.forEach((session) => {
-        const wrapper = document.createElement("div");
+            sessions.forEach((session) => {
+                const wrapper = document.createElement("div");
 
-        wrapper.className =
-            "flex items-center justify-between w-full px-4 group";
+                wrapper.className =
+                    "flex items-center justify-between w-full px-4 group";
 
-        if (session.session_id === SESSION_ID) {
-            wrapper.className =
-                "flex items-center justify-between w-full px-4 group bg-primary/10 border-l-2 border-primary";
-        }
+                if (session.session_id === SESSION_ID) {
+                    wrapper.className =
+                        "flex items-center justify-between w-full px-4 group bg-primary/10 border-l-2 border-primary";
+                }
 
-        const button = document.createElement("button");
+                const button = document.createElement("button");
 
-        button.type = "button";
-        button.className =
-            "flex-1 min-w-0 text-left py-2 text-label-md text-on-surface-variant hover:text-primary truncate";
+                button.type = "button";
+                button.className =
+                    "flex-1 min-w-0 text-left py-2 text-label-md text-on-surface-variant hover:text-primary truncate";
 
-        if (session.session_id === SESSION_ID) {
-            button.className =
-                "flex-1 min-w-0 text-left py-2 text-label-md text-primary font-semibold truncate";
-        }
+                if (session.session_id === SESSION_ID) {
+                    button.className =
+                        "flex-1 min-w-0 text-left py-2 text-label-md text-primary font-semibold truncate";
+                }
 
-        button.textContent = session.name || "Untitled Session";
+                button.textContent = session.name || "Untitled Session";
 
-        button.addEventListener("click", () => {
-            localStorage.setItem("active_session_id", session.session_id);
-            localStorage.setItem(
-                "active_session_name",
-                session.name || "Untitled Session"
-            );
+                button.addEventListener("click", () => {
+                    localStorage.setItem("active_session_id", session.session_id);
+                    localStorage.setItem(
+                        "active_session_name",
+                        session.name || "Untitled Session"
+                    );
 
-            window.location.href = `chat.html?session_id=${session.session_id}`;
-        });
+                    window.location.href = `chat.html?session_id=${session.session_id}`;
+                });
 
-        const deleteBtn = document.createElement("button");
+                const deleteBtn = document.createElement("button");
 
-        deleteBtn.type = "button";
-        deleteBtn.innerHTML = `
+                deleteBtn.type = "button";
+                deleteBtn.innerHTML = `
             <span class="material-symbols-outlined text-[18px]">
                 delete
             </span>
         `;
 
-        deleteBtn.className =
-            "shrink-0 opacity-0 group-hover:opacity-100 p-1 text-red-500 hover:text-red-700 transition";
+                deleteBtn.className =
+                    "shrink-0 opacity-0 group-hover:opacity-100 p-1 text-red-500 hover:text-red-700 transition";
 
-        deleteBtn.addEventListener("click", async (event) => {
-            event.stopPropagation();
+                deleteBtn.addEventListener("click", async (event) => {
+                    event.stopPropagation();
 
-            const confirmed = confirm(
-                `Delete "${session.name || "Untitled Session"}"?`
-            );
+                    const confirmed = confirm(
+                        `Delete "${session.name || "Untitled Session"}"?`
+                    );
 
-            if (!confirmed) return;
+                    if (!confirmed) return;
 
-            await fetch(
-                `${API_BASE_URL}/sessions/${session.session_id}`,
-                {
-                    method: "DELETE"
-                }
-            );
+                    await fetch(
+                        `${API_BASE_URL}/sessions/${session.session_id}`,
+                        {
+                            method: "DELETE"
+                        }
+                    );
 
-            if (session.session_id === SESSION_ID) {
-                window.location.href = "index.html";
-                return;
-            }
+                    if (session.session_id === SESSION_ID) {
+                        window.location.href = "index.html";
+                        return;
+                    }
 
-            loadSessions();
-        });
+                    loadSessions();
+                });
 
-        wrapper.appendChild(button);
-        wrapper.appendChild(deleteBtn);
+                wrapper.appendChild(button);
+                wrapper.appendChild(deleteBtn);
 
-        sessionsList.appendChild(wrapper);
-    });
-}
+                sessionsList.appendChild(wrapper);
+            });
+        }
 
         async function renameCurrentSession() {
             const title = document.getElementById("session-title");
@@ -649,7 +692,7 @@
         loadCurrentSession();
         loadSessions();
     </script>
-
+    <input id="file-input" type="file" accept=".pdf" multiple class="hidden" />
 </body>
 
 </html>
